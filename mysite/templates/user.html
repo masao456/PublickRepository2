@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+<body>
+    <div class="user-container">
+        <h4 class="username-heading">{{ user.username }}のマイページ</h4>
+        <div class="card" onclick="location.href='{% url 'myapp:user_edit' %}'">
+            <h5>ユーザー情報変更</h5>
+            <p>ユーザー情報を更新します</p>
+        </div>
+        <div class="card" onclick="location.href='{% url 'myapp:change_password' %}'">
+            <h5>パスワード変更</h5>
+            <p>パスワードを変更します</p>
+        </div>
+        <div class="card" onclick="location.href='{% url 'myapp:create_post' %}'">
+            <h5>投稿画面</h5>
+            <p>新しい投稿を作成します</p>
+        </div>
+        <div class="card" onclick="location.href='{% url 'myapp:list_posts' %}'">
+            <h5>投稿一覧</h5>
+            <p>投稿一覧を表示します</p>
+        </div>
+    </div>
+</body>
+</html>
+
+<body>
+    <h6>やる必要がある事、このページ作成残りは投稿一覧画面追加するのみ、投稿画面の作成、投稿一覧画面作成、投稿編集及び削除画面作成</h6>
+</body>
+{% endblock %}

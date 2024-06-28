@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+<h3>掲示板編集画面</h3>
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ edit_post_form.as_p }}
+    <button type="submit">更新</button>
+</form>
+{% endblock %}

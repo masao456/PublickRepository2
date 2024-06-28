@@ -1,0 +1,254 @@
+body{
+    font-family: 'Hiragino Kaku Gothic Pro', 'Meiryo', 'sans-serif';
+    font-size: 16px;
+    border-top: 10px solid #79a1b1;
+}
+.logo{
+    text-align: center;
+    padding: 5px;
+}
+a{
+    text-decoration: none;
+    color:#333333
+}
+h1{
+    font-size: 30px;
+    color: #333333;
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 15px;
+}
+h3{
+    margin: 0;
+    padding: 0px 0px 20px;
+    text-align: center;
+    font-size: 22px;
+}
+h4{
+    margin-bottom: 40px;
+    font-size: 36px;
+    color: #333;
+}
+.header{
+    width: 1200px;
+    margin: 0 auto;
+}
+.header ul{
+    display: flex;
+    justify-content: space-between;
+}
+.header ul li{
+    width:240px;
+    min-width: 240px;
+    text-align: center;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+.header ul li:first-child{
+    border-left: 1px solid #ddd;
+}
+.header ul li a{
+    display: block;
+    padding: 15px;
+}
+.header-img{
+    text-align: center;
+    opacity: 0.8;
+}
+.container{
+    font-size: 22px;
+    padding: 20px;
+    text-align: center;
+}
+.explain-thispage{
+    margin:auto;
+    justify-content: space-between;
+    text-align: center;
+    width: 500px;
+    padding-bottom: 20px;
+}
+.form-all{
+    width: 320px;
+    height: 420px;
+    background: #ddd;
+    color: #000;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    box-sizing:border-box;
+    padding: 70px 30px;
+}
+.form-loginbox{
+    margin: 0;
+    padding: 0;
+}
+.form-loginbox input{
+    width: 100%;
+    margin-bottom: 20px;
+}
+.form-loginbox [type="email"], input[type="password"]{
+    border:none;
+    border-bottom: 1px solid #000;
+    background: transparent;
+    outline: 0;
+    height: 40px;
+    color: #000;
+    font-size: 16px;
+}
+.form-loginbox input[type="submit"]{
+    border: none;
+    outline: none;
+    height: 40px;
+    background: #fb2525;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 20px;
+}
+.form-loginbox [type="submit"]:hover{
+    cursor: pointer;
+    background: #ffc107;
+    color: #000;
+}
+.messages{
+    list-style-type: none;
+    padding: 0;
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    text-align: center;
+}
+.messages li {
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+.form-registbox{
+    margin: 0;
+    padding: 0;
+}
+.form-registbox input{
+    width: 100%;
+    margin-bottom: 20px;
+}
+.form-registbox input[type="text"], input[type="email"], input[type="password"] {
+    border:none;
+    border-bottom: 1px solid #000;
+    background: transparent;
+    outline: 0;
+    height: 40px;
+    color: #000;
+    font-size: 16px;
+}
+.form-registbox input[type="submit"]{
+    border: none;
+    outline: none;
+    height: 40px;
+    background: #fb2525;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 20px;
+}
+.form-registbox [type="submit"]:hover{
+    cursor: pointer;
+    background: #ffc107;
+    color: #000;
+}
+.user-editbox{
+    margin: 0;
+    padding: 0;
+}
+.user-editbox input{
+    width: 100%;
+    margin-bottom: 20px;
+}
+.user-editbox input[type="text"],[type="email"]{
+    border:none;
+    border-bottom: 1px solid #000;
+    background: transparent;
+    outline: 0;
+    height: 40px;
+    color: #000;
+    font-size: 16px;
+}
+.user-editbox input[type="submit"]{
+    border: none;
+    outline: none;
+    height: 40px;
+    background: #fb2525;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 20px;
+}
+.user-editbox input[type="submit"]:hover{
+    cursor: pointer;
+    background: #ffc107;
+    color: #000;
+}
+.password-editbox{
+    margin: 0;
+    padding: 0;
+}
+.password-editbox input{
+    width: 100%;
+    margin-bottom: 20px;
+}
+.password-editbox input[type="password"],[type="confirm_password"]{
+    border:none;
+    border-bottom: 1px solid #000;
+    background: transparent;
+    outline: 0;
+    height: 40px;
+    color: #000;
+    font-size: 16px;
+}
+.password-editbox input[type="submit"]{
+    border: none;
+    outline: none;
+    height: 40px;
+    background: #fb2525;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 20px;
+}
+.password-editbox input[type="submit"]:hover{
+    cursor: pointer;
+    background: #ffc107;
+    color: #000;
+}
+.user-container{
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+.card{
+    background-color: #ddd;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.card:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+.card h5{
+    margin-top: 0;
+    color: #555;
+}
+.card p{
+    color: #777;
+}
+.username-heading {
+    font-size: 36px;
+    color: #333;
+    margin-bottom: 40px;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+    display: inline-block;
+}

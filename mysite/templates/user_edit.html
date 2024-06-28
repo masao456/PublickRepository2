@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<body>
+  <form method="POST">
+    {% csrf_token %}
+    <div class="form-all">
+      <h3>ユーザー情報変更</h3>
+      <div class="user-editbox">
+        <label for="id_username">ユーザー名</label>
+        <input type="text" name="username" maxlength="150" required id="id_username">
+        <label for="id_email">メールアドレス</label>
+        <input type="email" name="email" maxlength="255" required id="id_email">
+        <input type="submit" value="更新">
+      </div>
+    </div>
+  </form>
+</body>
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+{% endblock %}
