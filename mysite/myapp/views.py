@@ -3,7 +3,7 @@ from . import forms, views
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, FormView, UpdateView
 from django.views.generic.base import TemplateView, View
-from .forms import RegistForm, UserLoginForm, CreatePostForm
+from .forms import RegistForm, UserLoginForm, CreatePostForm, DeletePostForm, EditPostForm, PostCommentForm
 from .models import Posts
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -85,7 +85,6 @@ class CreatePostView(LoginRequiredMixin, CreateView):
     model = Posts
     form_class = CreatePostForm
     template_name = 'create_post.html'
-    success_url = reverse_lazy('myapp:create_post.html')
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -93,7 +92,7 @@ class CreatePostView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
     
     def get_success_url(self):
-        return reverse('myapp:list_posts.html')
+        return reverse('myapp:list_posts')
 
 class PostListView(ListView):
     model = Posts
@@ -101,19 +100,19 @@ class PostListView(ListView):
     context_object_name = 'posts'
 
     def get_queryset(self):
-        return Posts.objects.fetch_all_posts()
+        return Posts.objects.fetch_all_posts() # type: ignore
  
  
 class EditPostView(LoginRequiredMixin, UpdateView):
     model = Posts
     form_class = CreatePostForm
-    template_name = 'myapp/edit_post.html'
-    context_object_name = 'edit_post_form'
+    template_name = 'edit_post.html'
+    context_object_name = 'post'
 
     def get_object(self, queryset=None):
         post = get_object_or_404(Posts, id=self.kwargs['id'])
-        if post.user.id != self.request.user.id:
-            raise Http404
+        if post.user.id != self.request.user.id: # type: ignore
+            raise Http404("あなたはこの投稿を編集する権限がありません。")
         return post
 
     def form_valid(self, form):
@@ -121,4 +120,47 @@ class EditPostView(LoginRequiredMixin, UpdateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse('myapp:list_posts.html')
+        return reverse('myapp:list_posts')
+
+
+class DeletePostView(View):
+    def get(self, request, id):
+        post = get_object_or_404(Posts, id=id)
+        if post.user.id != request.user.id: # type: ignore
+            raise Http404("あなたはこの投稿を削除する権限がありません。")
+        delete_post_form = forms.DeletePostForm()
+        return render(request, 'myapp/delete_post.html', context={
+            'delete_post_form': delete_post_form, 'post': post
+            }
+        )
+
+    def post(self, request, id):
+        post = get_object_or_404(Posts, id=id)
+        if post.user.id != request.user.id: # type: ignore
+            raise Http404("あなたはこの投稿を削除する権限がありません。")
+        delete_post_form = forms.DeletePostForm(request.POST)
+        if delete_post_form.is_valid():
+            post.delete()
+            messages.success(request, '投稿を削除しました。')
+            return redirect('myapp:list_posts')
+        messages.error(request, '削除に失敗しました。もう一度お試しください。')
+        return render(request, 'myapp/delete_post.html', context={
+            'delete_post_form': delete_post_form, 'post': post
+            }
+        )
+
+def post_comments(request, post_id):
+    post_comment_form = forms.PostCommentForm(request.POST or None)
+    post = get_object_or_404(Posts, id=post_id)
+    if post_comment_form.is_valid(): 
+        post_comment_form.instance.post = post
+        post_comment_form.instance.user = request.user
+        post_comment_form.save()
+        return redirect('myapp:post_comments', post_id=post_id)
+    
+    return render(
+        request, 'myapp/post_comments.html', context={
+            'post_comment_form': post_comment_form,
+            'post': post,
+        }
+    )

@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>{{ post.title }}</h2>
+<form method="POST">
+{% csrf_token %}
+{{ post_comment_form.as_p }}
+<input type="submit" value="コメント送信">
+</form>
+{% endblock %}

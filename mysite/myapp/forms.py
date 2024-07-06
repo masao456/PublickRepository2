@@ -57,7 +57,41 @@ class PasswordChangeForm(forms.ModelForm):
     
 class CreatePostForm(forms.ModelForm):
     title = forms.CharField(label='タイトル')
+    content = forms.CharField(label='コンテンツ', widget=forms.Textarea)
+    image = forms.ImageField(label='写真')
     
     class Meta:
         model = Posts
         fields = ['title', 'content', 'image']
+        
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['image'].required = False
+        
+class EditPostForm(forms.ModelForm):
+    title = forms.CharField(label='タイトル')
+    content = forms.CharField(label='コンテンツ', widget=forms.Textarea)
+    image = forms.ImageField(label='写真')
+    class Meta:
+        model = Posts
+        fields = ['title', 'content', 'image']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['title'].required = False
+        self.fields['content'].required = False
+        self.fields['image'].required = False
+        
+class DeletePostForm(forms.ModelForm):
+    confirm_delete = forms.BooleanField(label='削除を確認する', required=True)
+    
+    class Meta:
+        model = Posts
+        fields = []
+        
+class PostCommentForm(forms.ModelForm):
+    comment = forms.CharField(label='', widget=forms.Textarea(attrs={'rows': 5, 'cols': 60}))
+    
+    class Meta:
+        model = Comments
+        fields = ('comment',)

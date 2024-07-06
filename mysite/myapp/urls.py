@@ -1,6 +1,6 @@
 from django.urls import path
 from django.contrib import admin
-from .views import RegistUserView, HomeView, UserLoginView, UserLogoutView, UserView, CreatePostView, PostListView, EditPostView
+from .views import RegistUserView, HomeView, UserLoginView, UserLogoutView, UserView, CreatePostView, PostListView, EditPostView, DeletePostView
 from . import views
 
 app_name = 'myapp'
@@ -15,4 +15,6 @@ urlpatterns = [
     path('create_post/', CreatePostView.as_view(), name='create_post'),
     path('list_posts/', PostListView.as_view(), name='list_posts'),
     path('edit_post<int:id>/', EditPostView.as_view(), name='edit_post'),
+    path('delete_post/<int:id>/', DeletePostView.as_view(), name='delete_post'),
+    path('post_comments/<int:post_id>', views.post_comments, name='post_comments'),
 ]

@@ -1,16 +1,29 @@
 {% extends 'base.html' %}
 {% block content %}
-{% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-        {% endfor %}
-    </ul>
-{% endif %}
-<h3>記事を投稿する</h3>
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">投稿</button>
-</form>
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <div class="post-container">
+        <h2>投稿画面</h2>
+        <form action="{% url 'myapp:create_post' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_title">タイトル:</label>
+                {{ form.title }}
+            </div>
+            <div class="form-group">
+                <label for="id_content">内容:</label>
+                {{ form.content }}
+            </div>
+            <div class="form-group">
+                <label for="id_image">写真を選択:</label>
+                {{ form.image }}
+            </div>
+            <button type="submit" class="btn btn-primary">投稿する</button>
+        </form>
+    </div>
 {% endblock %}

@@ -20,9 +20,9 @@
     {% for post in posts %}
         <tr>
             <td>{{ forloop.counter }}</td>
-            <td>{{ post.title }}</td>
+            <td><a href="{% url 'myapp:post_comments' post_id=post.id %}">{{ post.title }}</a></td>
             {% if post.user.id == user.id %}
-                <td><a href="{% url 'myapp:edit_post' id=post.id %}">{{ post.user }}</a></td>
+                <td><a href="{% url 'myapp:edit_post' id=post.id %}">{{ post.user.username }}</a></td>
             {% else %}
                 <td>{{ post.user }}</td>
             {% endif %}
