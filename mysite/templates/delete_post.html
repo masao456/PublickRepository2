@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
     <div class="post-container">
-        <h2>投稿削除確認</h2>
+        <h2>投稿削除最終確認</h2>
+        <div class="delete-check">削除を実行する場合はチェックを入れて削除ボタンを押して下さい</div>
         <form method="POST">
         {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="削除">
+        {{ delete_post_form.as_p }}
+        <button type="submit" class="delete-post">削除する</button>
         </form>
-        <p><a class="vavbar-brand" href="{% url 'myapp:delete_post' id=id %}">削除する</a></p>
 {% endblock %}

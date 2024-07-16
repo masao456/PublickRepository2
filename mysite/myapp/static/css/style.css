@@ -23,6 +23,8 @@ h3{
     padding: 0px 0px 20px;
     text-align: center;
     font-size: 22px;
+    color: #333;
+    margin-bottom: 20px;
 }
 h4{
     margin-bottom: 40px;
@@ -254,7 +256,7 @@ h4{
 }
 .post-container {
     width: 800px;
-    margin: 0 auto;
+    margin: 10px auto;
     padding: 20px;
     background-color: #f9f9f9;
     border: 1px solid #ccc;
@@ -298,7 +300,10 @@ h4{
 .post-container button:hover {
     background-color: #0056b3;
 }
-.post-container a {
+.btn-delete a {
+    display: flex;
+    flex-direction: column;
+    width: 760px;
     padding: 10px 20px;
     font-size: 16px;
     background-color: #ff0000f5;
@@ -310,56 +315,176 @@ h4{
     position: relative;
     top: 10px;
 }
-.post-container a:hover {
+.btn-delete a:hover {
     background-color: #b30000f5;
 }
-.post-container .form-image a {
-    margin-bottom: 20px;
+.delete-check {
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 770px;
+    height: 30px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border: 2px solid #FF4500;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    margin-bottom: 25px;
 }
-
-
-
-
-
-body {
-    font-family: Arial, sans-serif;
+.delete-check {
+    color: #FF4500;
+    font-weight: bold;
+    font-size: 1.3em;
 }
-
-table {
-    width: 100%;
-    border-collapse: collapse;
+.list-container {
+    display: flex;
+    justify-content: center;
     margin: 20px 0;
+}
+table {
+    width: 75%;
+    border-collapse: collapse;
     font-size: 18px;
     text-align: left;
 }
-
 table th, table td {
     padding: 12px;
-    border: 1px solid #ddd;
+    border: 1px solid #89c1dad3;
 }
-
 table th {
-    background-color: #f2f2f2;
+    background-color: #7ea2b1bb;
 }
-
 table tr:nth-child(even) {
     background-color: #f9f9f9;
 }
-
 table tr:hover {
     background-color: #f1f1f1;
 }
-
 a {
     text-decoration: none;
     color: #333;
 }
-
 a:hover {
-    color: #007bff;
+    color: #7ea2b1bb;
+}
+.list-info {
+    margin: 20px auto;
+    padding: 10px;
+    border: 1px solid #7ea2b1bb;
+    background-color: #7ea2b1bb;
+    width: 750px;
+    text-align: center;
+    font-size: 18px;
+    color: #555;
+    border-radius: 10px;
+}
+.list-info p {
+    margin: 10px 0;
+    line-height: 1.6;
+    font-weight: bold;
+    color: #0f0f0f;
+}
+.post-comment {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+h6 {
+    margin-top: 8px;
+    text-align: center;
+    border-bottom: 2px solid #7ea2b1bb;
+    display: inline-block;
+    padding-bottom: 5px;
+    font-size: 24px;
+}
+h7 {
+    text-align: center;
+    border-bottom: 2px solid #7ea2b1bb;
+    display: inline-block;
+    padding-bottom: 5px;
+    font-size: 20px;
+    margin: 16px 0;
+}
+.post-content {
+    border: 1px solid #ccc;
+    padding: 16px;
+    margin: 16px 0;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.comments {
+    list-style: none;
+    padding: 0;
+}
+.comment {
+    width: 50%;
+    border: 1px solid #ccc;
+    padding: 8px;
+    margin-bottom: 8px;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.comment-header {
+    font-weight: bold;
+}
+.comment-content {
+    margin-top: 8px;
+}
+.comment-form {
+    margin: 16px 0;
+}
+.comment-form textarea {
+    width: 50%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.comment-form input[type="submit"] {
+    background: #7ea2b1bb;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.comment-form input[type="submit"]:hover {
+    background: #555;
+}
+.back-button {
+    display: block;
+    margin: 1rem 0;
+    text-align: center;
+}
+.back-button a {
+    text-decoration: none;
+    color: #333;
+    background: #eee;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+}
+.back-button a:hover {
+    background: #ccc;
+}
+.edit-img {
+    max-width: 800px;
+    height: auto;
+    border: 2px solid #7ea2b1bb;
+    padding: 5px;
+    background-color: #fff;
 }
 
-h3 {
-    color: #333;
-    margin-bottom: 20px;
+.post-img {
+    max-width: 800px;
+    height: auto;
+    border: 2px solid #7ea2b1bb;
+    padding: 5px;
+    background-color: #fff;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }

@@ -22,9 +22,12 @@
         <div class="form-group">
             <label for="id_image">写真を選択:</label>
             {{ form.image }}
+            <img class="edit-img" src="{{ post.image.url }}" alt="Post image">
         </div>
         <button type="submit" class="btn btn-primary">更新</button>
-        <a class="btn btn-delete" href="{% url 'myapp:delete_post' post.id %}">削除</a>
+        <div class="btn-delete">
+        <a href="{% url 'myapp:delete_post' post.id %}">削除</a>
+        </div>
     </form>
 </div>
 {% endblock %}

@@ -1,9 +1,41 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>{{ post.title }}</h2>
-<form method="POST">
-{% csrf_token %}
-{{ post_comment_form.as_p }}
-<input type="submit" value="コメント送信">
-</form>
+<div class="post-comment">
+    <h6>{{ post.title }}</h6>
+    <div class="post-content">
+        <p>{{ post.content| linebreaksbr }}</p>
+    </div>
+    <div>
+        {% if post.image %}
+            <img class="post-img" src="{{ post.image.url }}" alt="Post image">
+        {% endif %}
+    </div>
+
+    <h7>コメント</h7>
+
+    <ul class="comments">
+        {% for comment in comments %}
+            <li class="comment">
+                <div class="comment-header">
+                    {{ comment.user.username }} {{ comment.created_at|date:"Y/m/d H:i" }}
+                </div>
+                <div class="comment-content">
+                    {{ comment.comment | linebreaksbr}}
+                </div>
+            </li>
+        {% empty %}
+            <li>まだコメントはありません。</li>
+        {% endfor %}
+    </ul>
+    <h7>コメントを追加</h7>
+    <form method="POST" class="comment-form">
+        {% csrf_token %}
+        {{ post_comment_form.as_p }}
+        <input type="submit" value="コメント送信">
+    </form>
+
+    <div class="back-button">
+        <a href="{% url 'myapp:list_posts'%}">戻る</a>
+    </div>
+</div>
 {% endblock %}

@@ -5,25 +5,21 @@
         <h4 class="username-heading">{{ user.username }}のマイページ</h4>
         <div class="card" onclick="location.href='{% url 'myapp:user_edit' %}'">
             <h5>ユーザー情報変更</h5>
-            <p>ユーザー情報を更新します</p>
+            <p>ユーザー情報の更新が行えます。</p>
         </div>
         <div class="card" onclick="location.href='{% url 'myapp:change_password' %}'">
             <h5>パスワード変更</h5>
-            <p>パスワードを変更します</p>
+            <p>パスワードを変更が行えます。</p>
         </div>
         <div class="card" onclick="location.href='{% url 'myapp:create_post' %}'">
             <h5>投稿画面</h5>
-            <p>新しい投稿を作成します</p>
+            <p>新しい投稿を作成できます。</p>
         </div>
         <div class="card" onclick="location.href='{% url 'myapp:list_posts' %}'">
             <h5>投稿一覧</h5>
-            <p>投稿一覧を表示します</p>
+            <p>投稿一覧を表示します。</p>
         </div>
     </div>
 </body>
 </html>
-
-<body>
-    <h6>やる必要がある事、コメント機能、投稿一覧画面のCssを作成、削除画面のCss templateを読まない問題。</h6>
-</body>
 {% endblock %}

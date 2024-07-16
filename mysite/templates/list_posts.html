@@ -8,26 +8,32 @@
     </ul>
 {% endif %}
 <h3>投稿一覧画面</h3>
-<table class="table table-striped table-hover">
-    <thead>
-        <tr>
-            <th>#</th>
-            <th>タイトル</th>
-            <th>作成者</th>
-        </tr>
-    </thead>
-    <tbody>
-    {% for post in posts %}
-        <tr>
-            <td>{{ forloop.counter }}</td>
-            <td><a href="{% url 'myapp:post_comments' post_id=post.id %}">{{ post.title }}</a></td>
-            {% if post.user.id == user.id %}
-                <td><a href="{% url 'myapp:edit_post' id=post.id %}">{{ post.user.username }}</a></td>
-            {% else %}
-                <td>{{ post.user }}</td>
-            {% endif %}
-        </tr>
-    {% endfor %}
-    </tbody>
-</table>
+
+<div class="list-info">
+    <p>タイトルをクリックすると投稿内容へ</p>
+    <p>作成者の名前をクリックすると編集＆削除画面へ（作成者のみ可能）</p>
+</div>
+
+<div class="list-container">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>タイトル</th>
+                <th>作成者</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for post in posts %}
+            <tr>
+                <td><a href="{% url 'myapp:post_comments' post_id=post.id %}">{{ post.title }}</a></td>
+                {% if post.user.id == user.id %}
+                    <td><a href="{% url 'myapp:edit_post' id=post.id %}">{{ post.user.username }}</a></td>
+                {% else %}
+                    <td>{{ post.user.username }}</td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}

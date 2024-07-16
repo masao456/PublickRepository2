@@ -4,7 +4,7 @@ from django.views.generic import ListView
 from django.views.generic.edit import CreateView, FormView, UpdateView
 from django.views.generic.base import TemplateView, View
 from .forms import RegistForm, UserLoginForm, CreatePostForm, DeletePostForm, EditPostForm, PostCommentForm
-from .models import Posts
+from .models import Posts, Comments
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -22,6 +22,10 @@ class HomeView(TemplateView):
 class RegistUserView(CreateView):
     template_name = 'regist.html'
     form_class = RegistForm
+    
+    def form_invalid(self, form):
+        messages.error(self.request, '登録に失敗しました。すでに使われているメールアドレス又はパスワードが簡単すぎます。')
+        return super().form_invalid(form)
     
 class UserLoginView(FormView):
     template_name = 'user_login.html'
@@ -129,7 +133,7 @@ class DeletePostView(View):
         if post.user.id != request.user.id: # type: ignore
             raise Http404("あなたはこの投稿を削除する権限がありません。")
         delete_post_form = forms.DeletePostForm()
-        return render(request, 'myapp/delete_post.html', context={
+        return render(request, 'delete_post.html', context={
             'delete_post_form': delete_post_form, 'post': post
             }
         )
@@ -143,24 +147,29 @@ class DeletePostView(View):
             post.delete()
             messages.success(request, '投稿を削除しました。')
             return redirect('myapp:list_posts')
-        messages.error(request, '削除に失敗しました。もう一度お試しください。')
-        return render(request, 'myapp/delete_post.html', context={
+        return render(request, 'delete_post.html', context={
             'delete_post_form': delete_post_form, 'post': post
             }
         )
 
 def post_comments(request, post_id):
-    post_comment_form = forms.PostCommentForm(request.POST or None)
     post = get_object_or_404(Posts, id=post_id)
-    if post_comment_form.is_valid(): 
-        post_comment_form.instance.post = post
-        post_comment_form.instance.user = request.user
-        post_comment_form.save()
-        return redirect('myapp:post_comments', post_id=post_id)
+    comments = Comments.objects.filter(post=post)
+    if request.method == 'POST':
+        post_comment_form = forms.PostCommentForm(request.POST)
+        if post_comment_form.is_valid(): 
+            comment = post_comment_form.save(commit=False)
+            comment.post = post
+            comment.user = request.user
+            comment.save()
+            return redirect('myapp:post_comments', post_id=post_id)
+    else:
+        post_comment_form = forms.PostCommentForm()
     
     return render(
-        request, 'myapp/post_comments.html', context={
-            'post_comment_form': post_comment_form,
+        request, 'post_comments.html', context={
             'post': post,
+            'comments': comments,
+            'post_comment_form': post_comment_form,
         }
     )

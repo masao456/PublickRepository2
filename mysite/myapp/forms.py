@@ -1,6 +1,7 @@
 from django import forms
 from .models import Users, Posts, Comments
 from django.contrib.auth.password_validation import validate_password
+from django.core.exceptions import ValidationError
 
 
 class RegistForm(forms.ModelForm):
@@ -46,7 +47,7 @@ class PasswordChangeForm(forms.ModelForm):
         password = cleaned_data['password']
         confirm_password = cleaned_data['confirm_password']
         if password != confirm_password:
-            raise forms.ValidationError('パスワードが異なります')
+            raise forms.ValidationError('パスワードが異なります。')
 
     def save(self, commit=False):
         user = super().save(commit=False)
