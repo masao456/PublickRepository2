@@ -22,7 +22,9 @@
         <div class="form-group">
             <label for="id_image">写真を選択:</label>
             {{ form.image }}
-            <img class="edit-img" src="{{ post.image.url }}" alt="Post image">
+            {% if post.image %}
+                <img class="post-img" src="{{ post.image.url }}" alt="Post image">
+            {% endif %}
         </div>
         <button type="submit" class="btn btn-primary">更新</button>
         <div class="btn-delete">
